@@ -1,17 +1,20 @@
 package com.sh;
 
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.sh.card.Card;
+import com.sh.objectType.CircularPlayLinkedList;
+
 public class Main {
 
-    /*
-    private Deque openDeque = null;
-    private Deque  garbageDeque  = null;
-    private CyclicPlayerLinkedList<Player> players = null;
+    private CircularPlayLinkedList<Player> players = null;
     private int numPlayers;
 
-     */
+    private LinkedList<Card> openDeque = null;
+
+    private LinkedList<Card> garbageDeque  = null;
 
 
     public static void main(String[] args) {
@@ -35,24 +38,34 @@ public class Main {
             playerOrdering();
             //오픈 덱에서 카드 한장 공개
             openCard();
+            ㅁㄴㅇㄹㅁㄴㅇ
             // Game start
             while(true) {
 
-                Player currPlayer = Players
+                Player currPlayer = players.remove();
 
-                while() {
+                while(true) {
                     // 해당 순서 플레이어 카드덱 프린트
-
-                    player
-
+                    currPlayer.printDeque();
 
                     // 한장이라도 냈는지 안냈는지
-                    boolean flag = false
+                    boolean flag = false;
+
                     // 선수로 부터 입력값 받기 (낼지 말지)
-                    input;
-                    if (input == false) {
-                        if(flag == false) {
-                            insertCard(card);
+                    System.out.println("카드를 제출 하시겠습니까?");
+                    System.out.printt("Y/N, yes/no");
+
+
+                    String response = scanner.next();
+
+
+                    if (response == "N" || response == "no") {
+
+                        // 한장도 제출하지 않았을경우 오픈뎅에서 한장의 카드를 가져간다
+                        if(!flag) {
+                            Card topCard = openDeque.poll();
+
+                            currPlayer.insertCard(card);
                         }
 
                         break;
@@ -60,22 +73,26 @@ public class Main {
                     }
 
                     // 카드 인데스 인풋 받기
+                    System.out.println("카드를 선택해 주세요.");
+                    int cardIndex = scanner.nextInt();
 
-                    Card recievedCard = sendCard();
+                    Card recievedCard = getCard(cardIndex);
+
+                    Card topGarbage = garbageDeque.peek();
                     // 카드 검사
-                    valid = isValid(recievedCard);
-                    if valid == true
-                        removeCard(i);
+                    boolean valid = recievedCard.compare(topGarbage);
 
-                        garbage.insertCard(card);
+                    if (valid == true) {
+                        currPlayer.removeCard(cardIndex);
+
+                        garbageDeque.insertCard(card);
 
                         // j, k, q 효과카드 처리
 
-
                         flag = true;
 
-                    eles {
-                        print("wrong card!!!")
+                    } eles {
+                        System.out.println("wrong card!!!");
                     }
 
                 } // turn loop

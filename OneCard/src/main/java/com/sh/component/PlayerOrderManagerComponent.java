@@ -9,7 +9,7 @@ import java.util.Random;
 public class PlayerOrderManagerComponent {
     private static PlayerOrderManagerComponent instance;
     private CircularPlayLinkedList<Player> playerList;
-    private boolean direction_flag = true;
+    private boolean f = true;
     // 생성자를 private로 선언하여 외부에서의 직접적인 인스턴스화를 방지
     private PlayerOrderManagerComponent() {
         playerList = new CircularPlayLinkedList<Player>();
